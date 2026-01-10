@@ -48,7 +48,7 @@ const SocialLinks = () => {
           résumé <FaGraduationCap size={30} />
         </>
       ),
-      href: "https://drive.google.com/drive/home",
+      href: "https://drive.google.com/file/d/1SVSlIO6xpksIiCv4C3ElUgaAWCxYeDBr/view?usp=drive_link",
     },
   ];
 
