@@ -1,102 +1,84 @@
 import React from "react";
-import multimodal from "../assets/portfolio/ugp2.png";
-import aerial from "../assets/portfolio/drone3.png";
-import rl from "../assets/portfolio/rl5.png";
-import web3 from "../assets/portfolio/web3.jpg";
-import cv2 from "../assets/portfolio/cv3.png";
-import ml from "../assets/portfolio/ml4.png";
+import { FiArrowUpRight, FiAward } from "react-icons/fi";
+import Section, { Reveal } from "./Section";
+import { moreProjects, projects } from "../data/content";
 
-const Project = () => {
-  const projects = [
-    {
-      id: 1,
-      src: multimodal,
-      pptText: "PPT",
-      docText: "TOOL",
-      docLink: "https://docs.google.com/presentation/d/1w2MyJn9HPaaSV_WUI6EsZbESoax0solTMI4opp406LI/edit?slide=id.p#slide=id.p",
-      pptLink: "https://github.com/subhrajitm20/Multimodal-Learning"
-    },
-    {
-      id: 2,
-      src: aerial,
-      pptText: "REPORT" ,
-      docText: "CODE",
-      docLink: "https://github.com/AerialRobotics-IITK/inter_iit_uav_guided_ugv/blob/main/MP_DR_T10_MID.pdf",
-      pptLink: "https://github.com/AerialRobotics-IITK/inter_iit_uav_guided_ugv"
-    },
-    {
-      id: 3,
-      src: rl,
-      pptText: "REPORT",
-      docText: "CODE",
-      docLink: "https://github.com/subhrajitm20/EE675-Reinforcement_Learning",
-      pptLink: "https://drive.google.com/drive/folders/1xa2A_B49D1-IBbBvnun66UW_GuToNvaF"
-    },
-    {
-      id: 4,
-      src: web3,
-      pptText: "CODE",
-      docText: "REPORT",
-      docLink: "https://onedrive.live.com/edit.aspx?resid=8933FBCD5EEF8F58!539&ithint=file%2cdocx&wdo=2&authkey=!AJ2sWlSdvjLVrio",
-      pptLink: "https://github.com/subhrajitm20/Web3.0"
-    },
-    {
-      id: 5,
-      src: cv2,
-      pptText: "PPT",
-      docText: "CODE",
-      docLink: "https://github.com/subhrajitm20/EE604-Image-Processing",
-      pptLink: "https://github.com/subhrajitm20/EE604-Image-Processing"
-    },
-    {
-      id: 6,
-      src: ml,
-      pptText: "PPT",
-      docText: "CODE",
-      docLink: "https://github.com/subhrajitm20/CS771-Assignments",
-      pptLink: "https://github.com/subhrajitm20/CS771-Assignments"
-    },
-  ];
-
-  return (
-    <div
-      name="projects"
-      className="bg-gradient-to-b from-black to-blue-900 w-full text-white md:h-screen mobile-gap"
-    >
-      <div className="max-w-screen-lg p-4 mx-auto flex flex-col justify-center w-full h-full">
-        <div className="pb-8">
-          <p className="text-4xl font-bold inline">
-            Projects
-          </p>
-          {/* <p className="py-6">Check out some of my work right here</p> */}
-        </div>
-
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 px-12 sm:px-0">
-        {projects.map(({ id, src, pptText, docText,docLink,pptLink}) => (
-          <div key={id} className="shadow-md shadow-white rounded-lg">
-            <img
-              src={src}
-              alt=""
-              className="rounded-md duration-200 hover:scale-105 w-full h-48 object-contain"
-            />
-            <div className="flex items-center justify-center">
-            <a href={pptLink} target="_blank" rel="noopener noreferrer">
-                <button className="w-1/2 px-6 py-3 m-4 duration-200 hover:scale-105">
-                  {pptText}
-                </button>
-              </a>
-              <a href={docLink} target="blank" rel="noopener noreferrer">
-                <button className="w-1/2 px-6 py-3 m-4 duration-200 hover:scale-105">
-                  {docText}
-                </button>
-              </a>
-            </div>
-          </div>
+const ProjectCard = ({ title, context, period, badge, image, description, tags, links }) => (
+  <article className="card group flex h-full flex-col overflow-hidden transition-colors hover:border-white/[0.14]">
+    <div className="relative aspect-[16/9] overflow-hidden bg-white">
+      <img
+        src={image}
+        alt=""
+        loading="lazy"
+        className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+      />
+      {badge && (
+        <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-ink-900/85 px-3 py-1 text-xs font-semibold text-amber-200 ring-1 ring-amber-200/30 backdrop-blur">
+          <FiAward /> {badge}
+        </span>
+      )}
+    </div>
+    <div className="flex flex-1 flex-col p-6">
+      <p className="font-mono text-xs text-slate-500">{period}</p>
+      <h3 className="mt-2 font-display text-xl font-semibold leading-snug text-white">{title}</h3>
+      <p className="mt-1 text-sm text-accent-300/90">{context}</p>
+      <p className="mt-4 flex-1 text-[15px] leading-relaxed text-slate-400">{description}</p>
+      <ul className="mt-5 flex flex-wrap gap-1.5">
+        {tags.map((tag) => (
+          <li key={tag} className="chip">
+            {tag}
+          </li>
+        ))}
+      </ul>
+      <div className="mt-5 flex gap-5 border-t border-white/[0.06] pt-4">
+        {links.map(({ label, href }) => (
+          <a key={href} href={href} target="_blank" rel="noopener noreferrer" className="text-link">
+            {label} <FiArrowUpRight />
+          </a>
         ))}
       </div>
-      </div>
     </div>
-  );
-};
+  </article>
+);
 
-export default Project;
+const Projects = () => (
+  <Section
+    id="projects"
+    eyebrow="Projects"
+    title="Selected projects"
+    intro="Research and competition work from IIT Kanpur, spanning multimodal learning, reinforcement learning, robotics and classical ML."
+  >
+    <div className="grid gap-6 md:grid-cols-2">
+      {projects.map((project, i) => (
+        <Reveal key={project.title} delay={(i % 2) * 80}>
+          <ProjectCard {...project} />
+        </Reveal>
+      ))}
+    </div>
+
+    <Reveal className="mt-14">
+      <h3 className="font-display text-lg font-semibold text-white">More projects</h3>
+      <ul className="mt-4 divide-y divide-white/[0.06] border-y border-white/[0.06]">
+        {moreProjects.map(({ title, description, period, href }) => (
+          <li key={title}>
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group grid gap-1 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline sm:gap-6"
+            >
+              <span className="font-medium text-slate-100 transition group-hover:text-accent-300">{title}</span>
+              <span className="text-sm leading-relaxed text-slate-400">{description}</span>
+              <span className="flex items-center gap-1 font-mono text-xs text-slate-500">
+                {period}
+                <FiArrowUpRight className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent-300" />
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </Reveal>
+  </Section>
+);
+
+export default Projects;

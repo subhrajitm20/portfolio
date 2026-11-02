@@ -1,54 +1,29 @@
 import React from "react";
-import { FaGithub, FaLinkedin, FaInstagram, FaGraduationCap } from "react-icons/fa";
-import { HiOutlineMail } from "react-icons/hi";
+import { FiArrowUp, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import { profile } from "../data/content";
 
-const Footer = () => {
-  return (
-    <footer id="more" className="bg-gradient-to-b from-blue-900 to-black text-white py-8">
-      <div className="flex justify-center items-center mb-6">
-        <a
-          href="https://www.linkedin.com/in/subhrajit-mishra-a0b851210/"
-          className="mr-4"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <FaLinkedin size={30} />
+const Footer = () => (
+  <footer className="border-t border-white/[0.06]">
+    <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-5 px-4 py-10 text-sm text-slate-500 sm:flex-row sm:px-6">
+      <p>
+        © {new Date().getFullYear()} {profile.name} · {profile.location}
+      </p>
+      <div className="flex items-center gap-5">
+        <a href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="transition hover:text-white">
+          <FiGithub size={18} />
         </a>
-        <a
-          href="https://github.com/subhrajitm20"
-          className="mr-4"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <FaGithub size={30} />
+        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="transition hover:text-white">
+          <FiLinkedin size={18} />
         </a>
-        <a href="mailto:2003subhrajit@gmail.com" className="mr-4">
-          <HiOutlineMail size={30} />
+        <a href={`mailto:${profile.email}`} aria-label="Email" className="transition hover:text-white">
+          <FiMail size={18} />
         </a>
-        <a
-          href="https://www.instagram.com/subhrajit_._mishra/"
-          className="mr-4"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <FaInstagram size={30} />
-        </a>
-        <a
-          href="https://drive.google.com/drive/home"
-          className="mr-4"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <FaGraduationCap size={30} />
+        <a href="#top" className="ml-2 flex items-center gap-1.5 transition hover:text-white">
+          Back to top <FiArrowUp />
         </a>
       </div>
-      <div className="text-center">
-        <p className="text-sm">
-          &copy; 2023-2024 &nbsp; कुछ तो लोग कहेंगे, लोगों का काम है कहना 
-        </p>
-      </div>
-    </footer>
-  );
-};
+    </div>
+  </footer>
+);
 
 export default Footer;

@@ -1,28 +1,32 @@
 import About from "./components/About";
 import Contact from "./components/Contact";
-import Skills from "./components/Skills";
+import Education from "./components/Education";
+import Experience from "./components/Experience";
+import Footer from "./components/footer";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
-import Projects from "./components/projects";
-import SocialLinks from "./components/SocialLinks";
-import Footer from "./components/footer";
-import WorkEx from "./components/Experience";
 import Patents from "./components/patents";
+import Projects from "./components/projects";
+import Recognition from "./components/Recognition";
+import Skills from "./components/Skills";
 
 function App() {
   return (
-    <div>
+    <>
       <NavBar />
-      <Home />
-      <About />
-      <WorkEx />
-      <Patents />
-      <Projects />
-      <Skills />
-      <Contact />
+      <main>
+        <Home />
+        <About />
+        <Experience />
+        <Patents />
+        <Projects />
+        <Skills />
+        <Education />
+        <Recognition />
+        <Contact />
+      </main>
       <Footer />
-      <SocialLinks />
-    </div>
+    </>
   );
 }
 

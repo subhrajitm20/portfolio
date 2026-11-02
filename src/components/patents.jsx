@@ -1,64 +1,51 @@
 import React from "react";
+import Section, { Reveal } from "./Section";
+import { patentAreas, patents } from "../data/content";
 
 const Patents = () => {
-  const items = [
-    {
-      title: "Methods and system for AI-based pixel-block prediction for video codec",
-      description:
-        "Developed a unified, low-complex neural network architecture for intra prediction, which leverages neighboring reference lines to predict coding units (CUs) and is optimized for efficient hardware implementation.",
-    },
-    {
-      title:
-        "Inverted-L-Scan Method for AI-based Intra-frame prediction in video codec",
-      description:
-        "Developed a pre- and post-processing method utilizing an inverted L-scan order to prepare neighboring pixels for a unified AI-based intra prediction model within a post-VVC codec, resulting in enhanced coding efficiency.",
-    },
-    {
-      title:
-        "Neural network Filtering of ITU-T specified reference pixels prior to Intra prediction",
-      description:
-        "Developed a novel neural network–based filtering and mixing of available input pixels prior to Intra prediction, resulting in better prediction of pixels, thus improving compression rates.",
-    },
-    {
-      title: "Content-based neural network loop filter for advanced enhancement",
-      description:
-        "Created a content-based switching of ultra-low-complex neural network architectures to focus on improving specific content-based artifacts, reducing generalization by a single neural network.",
-    },
-  ];
+  const counts = patents.reduce((acc, { area }) => ({ ...acc, [area]: (acc[area] || 0) + 1 }), {});
 
   return (
-    <div
-      name="Patents"
-      className="w-full min-h-screen bg-gradient-to-b from-blue-900 to-black text-white py-16"
+    <Section
+      id="patents"
+      eyebrow="Patents"
+      title={`${patents.length} filed patents in neural video coding`}
+      intro="Filed with Samsung Research, two of them as first inventor. They cover the two coding tools I spent the most time on: intra prediction and in-loop filtering."
+      className="border-t border-white/[0.05] bg-ink-950/40"
     >
-      <div className="max-w-screen-lg mx-auto px-6 flex flex-col">
-        {/* Heading */}
-        <div className="pb-6">
-          <p className="text-4xl font-bold inline">Patents</p>
-        </div>
+      <Reveal className="mb-6 flex flex-wrap gap-2">
+        {Object.entries(patentAreas).map(([key, { label, className }]) => (
+          <span key={key} className={`rounded-full border px-3 py-1 text-xs font-medium ${className}`}>
+            {label} · {counts[key] || 0}
+          </span>
+        ))}
+      </Reveal>
 
-        {/* Sub-heading */}
-        <p className="text-lg text-gray-300 mb-10">
-          These patents have been filed in affiliation with Samsung Research.
-        </p>
-
-        {/* Patent Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {items.map((item, idx) => (
-            <div
-              key={idx}
-              className="bg-white/5 backdrop-blur-md rounded-xl p-6 shadow-lg 
-                         transition-transform duration-300 hover:scale-[1.03] cursor-default"
+      <div className="grid gap-4 md:grid-cols-2">
+        {patents.map((patent, i) => {
+          const area = patentAreas[patent.area];
+          return (
+            <Reveal
+              key={patent.title}
+              as="article"
+              delay={(i % 2) * 80}
+              className="card flex flex-col p-6 transition-colors hover:border-white/[0.14]"
             >
-              <h3 className="text-2xl font-semibold mb-3">{item.title}</h3>
-              <p className="text-gray-200 text-lg leading-relaxed">
-                {item.description}
-              </p>
-            </div>
-          ))}
-        </div>
+              <div className="flex items-center justify-between gap-3">
+                <span className={`rounded-full border px-2.5 py-0.5 text-[11px] font-medium ${area.className}`}>
+                  {area.label}
+                </span>
+                <span className="font-mono text-xs text-slate-500">
+                  {String(i + 1).padStart(2, "0")} · Filed
+                </span>
+              </div>
+              <h3 className="mt-4 font-display text-lg font-semibold leading-snug text-white">{patent.title}</h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-slate-400">{patent.description}</p>
+            </Reveal>
+          );
+        })}
       </div>
-    </div>
+    </Section>
   );
 };
 

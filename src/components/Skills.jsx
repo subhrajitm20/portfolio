@@ -1,103 +1,49 @@
 import React from "react";
+import { FiCode, FiCpu, FiLayers, FiTool } from "react-icons/fi";
+import Section, { Reveal } from "./Section";
+import { skills } from "../data/content";
 
-import dsa from "../assets/linux4.png"
-import node from "../assets/git4.png";
-import javascript from "../assets/python.png";
-import rosimg from "../assets/rosjpeg_xl.jpg";
-import matlab from "../assets/matlab.jpg";
-import bash from "../assets/bash7.png";
-import blockchain from "../assets/blockchain.jpg";
-import cpp from "../assets/cpp.png"
-import sql from "../assets/sql.png"
-
-const Skills = () => {
-  const techs = [
-    {
-      id: 1,
-      src: cpp,
-      title: "CPP",
-      style: "shadow-blue-500",
-    },
-    {
-      id: 2,
-      src: javascript,
-      title: "Python",
-      style: "shadow-yellow-500",
-    },
-    {
-      id: 3,
-      src: dsa,
-      title: "Linux",
-      style: "shadow-orange-400",
-    },
-    {
-      id: 4,
-      src: rosimg,
-      title: "Robot Operating System",
-      style: "shadow-black",
-      imgStyle: "w-20 h-20 sm:w-100 sm:h-24", // <-- larger image for rosimg
-    },
-    {
-      id: 5,
-      src: node,
-      title: "Git",
-      style: "shadow-red-400",
-    },
-    {
-      id: 6,
-      src: sql,
-      title: "SQL",
-      style: "shadow-blue-400",
-    },
-    {
-      id: 7,
-      src: blockchain,
-      title: "Blockchain",
-      style: "shadow-blue-600",
-    },
-
-    {
-      id: 8,
-      src: matlab,
-      title: "Matlab",
-      style: "shadow-blue-400",
-    },
-    {
-      id: 9,
-      src: bash,
-      title: "Bash",
-      style: "shadow-white",
-    },
-  ];
-
-  return (
-    <div
-      name="skills"
-      className="bg-gradient-to-b from-blue-900 to-black w-full h-screen mobile-gap"
-    >
-      <div className="max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full h-full text-white">
-        <div>   
-          <br/><br/> 
-          <p className="text-4xl font-bold">
-            Skills
-          </p>
-          <p className="py-6">These are the technologies I've worked with</p>
-        </div>
-
-        <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-8 text-center py-8 px-12 sm:px-0">
-          {techs.map(({ id, src, title, style }) => (
-            <div
-              key={id}
-              className={`flex flex-col items-center justify-center h-36 sm:h-40 p-4 rounded-lg shadow-md hover:scale-105 duration-500 ${style}`}
-            >
-              <img src={src} alt={title} className="w-16 h-16 sm:w-20 sm:h-20 object-contain" />
-              <p className="mt-3 text-sm sm:text-base">{title}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+const icons = {
+  ml: FiLayers,
+  perf: FiCpu,
+  code: FiCode,
+  tools: FiTool,
 };
+
+const Skills = () => (
+  <Section
+    id="skills"
+    eyebrow="Skills"
+    title="Technical toolkit"
+    intro="Comfortable across the stack: training models in Python, then making them run fast in C and C++."
+    className="border-t border-white/[0.05] bg-ink-950/40"
+  >
+    <div className="grid gap-4 md:grid-cols-2">
+      {skills.map(({ group, icon, items }, i) => {
+        const Icon = icons[icon];
+        return (
+          <Reveal key={group} delay={(i % 2) * 80} className="card p-6 sm:p-7">
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-400/10 text-accent-300 ring-1 ring-accent-400/20">
+                <Icon size={19} />
+              </span>
+              <h3 className="font-display text-lg font-semibold text-white">{group}</h3>
+            </div>
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {items.map((item) => (
+                <li
+                  key={item}
+                  className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 text-sm text-slate-200"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        );
+      })}
+    </div>
+  </Section>
+);
 
 export default Skills;

@@ -1,110 +1,134 @@
 import React from "react";
-import eversana from "../assets/portfolio/eversana6.png";
-import samsung from "../assets/portfolio/samsung.jpg";
+import { FiArrowUpRight, FiAward, FiMapPin } from "react-icons/fi";
+import Section, { Reveal } from "./Section";
+import { experience } from "../data/content";
 
-const Experience = () => {
-  const Experiences = [
-    {
-      id: 1,
-      title: "Samsung Research",
-      src: samsung,
-      link: "https://research.samsung.com/sri-b",
-      description:
-        "Advanced Engineer in Visual Intelligence Team — Focused on next-generation video codecs, neural loop filters, Neural network based Intra prediction, FFmpeg integration, and low-latency video compression pipelines.",
-      pptText: "REPORT",
-      docText: "CODE",
-      docLink:
-        "https://github.com/AerialRobotics-IITK/inter_iit_uav_guided_ugv/blob/main/MP_DR_T10_MID.pdf",
-      pptLink: "https://github.com/AerialRobotics-IITK/inter_iit_uav_guided_ugv",
-    },
-    {
-      id: 2,
-      title: "EVERSANA (Internship)",
-      src: eversana,
-      link: "https://www.eversana.com/",
-      description:
-        "Intern, Digital & Data Solutions — worked on data-driven tools and automation to support digital healthcare workflows. Contributed to analysis, tooling, and prototype implementations that improved operational workflows.",
-      pptText: "PPT",
-      docText: "TOOL",
-      docLink:
-        "https://docs.google.com/document/d/1DrWs7rwFmNBb0Nu4jLkKuYiSGhbo5dwDiSgskTSHohE/edit",
-      pptLink: "https://github.com/subhrajitm20/EVERSANA_intern",
-    },
-  ];
+const Tags = ({ items }) => (
+  <ul className="flex flex-wrap gap-1.5">
+    {items.map((tag) => (
+      <li key={tag} className="chip">
+        {tag}
+      </li>
+    ))}
+  </ul>
+);
 
-  return (
-    <div
-      name="Experience"
-      className="bg-gradient-to-b from-black to-blue-900 w-full text-white md:h-screen mobile-gap"
-    >
-      <div className="max-w-screen-lg p-6 mx-auto flex flex-col justify-center w-full h-full">
-        <div className="pb-8">
-          <p className="text-4xl font-bold inline">Experience</p>
+const Links = ({ items }) => (
+  <div className="flex flex-wrap gap-x-5 gap-y-2">
+    {items.map(({ label, href }) => (
+      <a key={href} href={href} target="_blank" rel="noopener noreferrer" className="text-link">
+        {label} <FiArrowUpRight />
+      </a>
+    ))}
+  </div>
+);
+
+const Workstream = ({ title, metric, description, tags, links }) => (
+  <div className="flex flex-col rounded-xl border border-white/[0.06] bg-ink-800/70 p-5 transition hover:border-white/[0.12] sm:p-6">
+    <h4 className="font-display text-lg font-semibold text-white">{title}</h4>
+    <p className="mt-1.5 font-mono text-[13px] text-accent-300">{metric}</p>
+    <p className="mt-3 flex-1 text-[15px] leading-relaxed text-slate-400">{description}</p>
+    <div className="mt-5">
+      <Tags items={tags} />
+    </div>
+    {links && (
+      <div className="mt-4">
+        <Links items={links} />
+      </div>
+    )}
+  </div>
+);
+
+const Job = ({ job }) => (
+  <article className="card overflow-hidden">
+    <div className="flex flex-col gap-5 border-b border-white/[0.06] p-6 sm:p-8 md:flex-row md:items-start md:justify-between">
+      <div className="flex items-start gap-5">
+        <div
+          className={`flex h-14 w-28 shrink-0 items-center justify-center overflow-hidden rounded-xl ring-1 ring-white/10 ${job.logoClass}`}
+        >
+          <img src={job.logo} alt={`${job.company} logo`} className="max-h-full w-full object-contain" />
         </div>
-
-        <div className="flex flex-col gap-12">
-          {Experiences.map((exp, idx) => {
-            const isEven = idx % 2 === 1; // alternate layout
-            return (
-              <div
-                key={exp.id}
-                className={`flex flex-col md:flex-row ${
-                  isEven ? "md:flex-row-reverse" : ""
-                } items-center gap-6`}
-              >
-                {/* Image */}
-                <div className="w-full md:w-1/3 flex-shrink-0">
-                  <a
-                    href={exp.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      src={exp.src}
-                      alt={exp.title}
-                      className="rounded-lg shadow-lg w-full h-48 md:h-44 object-contain bg-white/5 p-4
-                                transform transition-transform duration-300 hover:scale-105"
-                    />
-                  </a>
-                </div>
-                {/* Text */}
-                <div className="w-full md:w-2/3">
-                  <h3 className="text-2xl font-semibold mb-2">{exp.title}</h3>
-                  <p className="text-lg text-gray-200 leading-relaxed mb-4">
-                    {exp.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-3">
-                    <a
-                      href={exp.pptLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block"
-                    >
-                      <button className="px-5 py-2 rounded-md border border-white/20 hover:scale-105 duration-150">
-                        {exp.pptText}
-                      </button>
-                    </a>
-
-                    <a
-                      href={exp.docLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block"
-                    >
-                      <button className="px-5 py-2 rounded-md border border-white/20 hover:scale-105 duration-150">
-                        {exp.docText}
-                      </button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+        <div>
+          <h3 className="font-display text-2xl font-semibold tracking-tight text-white">{job.company}</h3>
+          <p className="mt-1 text-slate-200">
+            {job.role} <span className="text-slate-500">·</span> {job.team}
+          </p>
         </div>
       </div>
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[13px] text-slate-400 md:flex-col md:items-end md:gap-1.5">
+        <span className="text-slate-200">{job.period}</span>
+        <span className="flex items-center gap-1.5">
+          <FiMapPin size={13} /> {job.location}
+        </span>
+        <span className="chip md:mt-1">{job.type}</span>
+      </div>
     </div>
-  );
-};
+
+    <div className="p-6 sm:p-8">
+      <p className="max-w-3xl leading-relaxed text-slate-300 sm:text-lg">{job.summary}</p>
+
+      {job.workstreams && (
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {job.workstreams.map((ws) => (
+            <Workstream key={ws.title} {...ws} />
+          ))}
+        </div>
+      )}
+
+      {job.bullets && (
+        <ul className="mt-6 max-w-3xl space-y-3">
+          {job.bullets.map((text) => (
+            <li key={text} className="flex gap-3 leading-relaxed text-slate-400">
+              <span aria-hidden="true" className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-400" />
+              {text}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {job.recognition && (
+        <div className="mt-8 rounded-xl border border-amber-300/15 bg-amber-300/[0.04] p-5">
+          <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-amber-200/80">
+            <FiAward /> Recognition
+          </p>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {job.recognition.map((item) => (
+              <li
+                key={item}
+                className="rounded-full border border-amber-200/15 bg-amber-200/[0.06] px-3 py-1 text-sm text-amber-50/90"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {(job.tags || job.links) && (
+        <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          {job.tags && <Tags items={job.tags} />}
+          {job.links && <Links items={job.links} />}
+        </div>
+      )}
+    </div>
+  </article>
+);
+
+const Experience = () => (
+  <Section
+    id="experience"
+    eyebrow="Experience"
+    title="From neural-network research to production codec engineering"
+    intro="Most of my industry work has been at Samsung Research, building compression tools that have to be both state-of-the-art and cheap enough to run in hardware."
+  >
+    <div className="space-y-8">
+      {experience.map((job) => (
+        <Reveal key={job.company}>
+          <Job job={job} />
+        </Reveal>
+      ))}
+    </div>
+  </Section>
+);
 
 export default Experience;
