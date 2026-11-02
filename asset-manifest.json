@@ -1,29 +1,20 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.52f34cc4.css",
-    "main.js": "/portfolio/static/js/main.2a4fce08.js",
-    "static/media/cropped_sjm.png": "/portfolio/static/media/cropped_sjm.03881d25f581b3cea48b.png",
-    "static/media/cv3.png": "/portfolio/static/media/cv3.3a273447459f3fcf25f1.png",
+    "main.css": "/portfolio/static/css/main.a2105dcb.css",
+    "main.js": "/portfolio/static/js/main.6f665d87.js",
     "static/media/ml4.png": "/portfolio/static/media/ml4.4afd8f676c8c15b91d54.png",
     "static/media/rl5.png": "/portfolio/static/media/rl5.3894d4fbd1e8af792103.png",
     "static/media/ugp2.png": "/portfolio/static/media/ugp2.a33f021c3f86ec33317a.png",
-    "static/media/drone3.png": "/portfolio/static/media/drone3.b2f8a6cc87344f9de906.png",
-    "static/media/cpp.png": "/portfolio/static/media/cpp.666af1b3598c92045b63.png",
-    "static/media/matlab.jpg": "/portfolio/static/media/matlab.06ff427d743af0de984e.jpg",
-    "static/media/eversana6.png": "/portfolio/static/media/eversana6.38d2d24fee0be35425b2.png",
-    "static/media/python.png": "/portfolio/static/media/python.dea924d737bb84eb9ce3.png",
-    "static/media/samsung.jpg": "/portfolio/static/media/samsung.47f49ae944400ef99993.jpg",
-    "static/media/blockchain.jpg": "/portfolio/static/media/blockchain.05acad055a439bae0c01.jpg",
-    "static/media/web3.jpg": "/portfolio/static/media/web3.ac657cbcbaac1d18d7c2.jpg",
-    "static/media/rosjpeg_xl.jpg": "/portfolio/static/media/rosjpeg_xl.629fb49794f51d633ece.jpg",
-    "static/media/sql.png": "/portfolio/static/media/sql.64b3eb63f995c0da35b3.png",
-    "static/media/linux4.png": "/portfolio/static/media/linux4.c549d6a7e4dd1176c8de.png",
+    "static/media/eversana.png": "/portfolio/static/media/eversana.12cb5f8d57c5e6995914.png",
+    "static/media/heroImage-sjm.png": "/portfolio/static/media/heroImage-sjm.69b850b05ae290b15cc3.png",
+    "static/media/samsung.png": "/portfolio/static/media/samsung.52c3284376b4aea2db22.png",
+    "static/media/uav-ugv.svg": "/portfolio/static/media/uav-ugv.50dd9132e9fdac2d26391d7873df49e8.svg",
     "index.html": "/portfolio/index.html",
-    "main.52f34cc4.css.map": "/portfolio/static/css/main.52f34cc4.css.map",
-    "main.2a4fce08.js.map": "/portfolio/static/js/main.2a4fce08.js.map"
+    "main.a2105dcb.css.map": "/portfolio/static/css/main.a2105dcb.css.map",
+    "main.6f665d87.js.map": "/portfolio/static/js/main.6f665d87.js.map"
   },
   "entrypoints": [
-    "static/css/main.52f34cc4.css",
-    "static/js/main.2a4fce08.js"
+    "static/css/main.a2105dcb.css",
+    "static/js/main.6f665d87.js"
   ]
 }
